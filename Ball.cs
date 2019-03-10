@@ -4,8 +4,14 @@ namespace Pong
 {
     public class Ball : Entity
     {
-        public Ball()
+        public Ball(int xPos, int yPos)
         {
+            this.xPos = xPos;
+            this.yPos = yPos;
+        }
+
+        public void Draw(){
+            
         }
     }
 }
