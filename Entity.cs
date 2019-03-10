@@ -6,7 +6,6 @@ namespace Pong
     {
         protected int xPos;
         protected int yPos;
-        protected int size;
         protected ConsoleColor color;
     }
 }
