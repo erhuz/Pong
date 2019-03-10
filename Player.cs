@@ -8,13 +8,19 @@ namespace Pong
         private int score = 0;
         private int size;
 
-        public Player(string name, int xPos, int yPos, ConsoleColor color = ConsoleColor.Blue, int size = 3)
-        {
+        public Player(
+            string name,
+            int xPos,
+            int yPos,
+            ConsoleColor color = ConsoleColor.Blue,
+            int size = 3
+        ){
+        
             this.name = name;
             this.xPos = xPos;
-            this.yPos = (yPos / 2);
             this.size = size;
             this.color = color;
+            this.yPos = yPos - (size / 2); // Center player position vertically
         }
 
         public void Draw(){
