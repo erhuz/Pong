@@ -43,6 +43,14 @@ namespace Pong {
             return (xOffset + width - 1);
         }
 
+        public int GetCenterVertical(){
+            return (this.GetBorderTop() + this.GetBorderBottom() / 2);
+        }
+        
+        public int GetCenterHorizontal(){
+            return (this.GetBorderLeft() + this.GetBorderRight() / 2);
+        }
+
         public void Draw () {
 
             for (int y = 0; y < height + (this.yOffset * 2); y++) {
