@@ -8,17 +8,27 @@ namespace Pong
         private int score = 0;
         private int size;
 
-        public Player(string name, int xPos, int yPos, int size = 5, ConsoleColor = ConsoleColor.Blue)
+        public Player(string name, int xPos, int yPos, ConsoleColor color = ConsoleColor.Blue, int size = 3)
         {
             this.name = name;
             this.xPos = xPos;
-            this.yPos = yPos;
+            this.yPos = (yPos / 2);
             this.size = size;
+            this.color = color;
         }
 
         public void Draw(){
-            //TODO (5) is to be replaced with left border coordinate
-            Console.SetCursorPosition((5)+2, this.yPos);
+            ConsoleColor initialColor = Console.BackgroundColor;
+            Console.BackgroundColor = color;
+
+            for (int i = 0; i < this.size; i++)
+            {
+                Console.SetCursorPosition(this.xPos, this.yPos + i);
+                Console.Write(" ");
+            }
+
+            Console.BackgroundColor = initialColor;
+            Console.SetCursorPosition (0, 0);
         }
     }
 }
