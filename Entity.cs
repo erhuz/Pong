@@ -4,9 +4,9 @@ namespace Pong
 {
     public abstract class Entity
     {
-        private int xPos { get; }
-        private int yPos { get; }
-        private int size { get; }
-        private ConsoleColor color;
+        protected int xPos;
+        protected int yPos;
+        protected int size;
+        protected ConsoleColor color;
     }
 }
