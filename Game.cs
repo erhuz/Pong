@@ -1,11 +1,9 @@
 using System;
 
-namespace Pong
-{
-    public class Game
-    {
+namespace Pong {
+    public class Game {
         private int duration = 0;
-        public Game(){
+        public Game () {
 
             // Initialize game
             Console.CursorVisible = false;
