@@ -45,8 +45,6 @@ namespace Pong {
 
         public void Draw () {
 
-            Console.Clear ();
-
             for (int y = 0; y < height + (this.yOffset * 2); y++) {
                 for (int x = 0; x < (width + this.xOffset * 2); x++) {
                     Console.SetCursorPosition (x, y);
