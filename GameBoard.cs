@@ -27,6 +27,22 @@ namespace Pong {
             this.outlineColor = outlineColor;
         }
 
+        public int GetBorderTop () {
+            return yOffset;
+        }
+
+        public int GetBorderBottom () {
+            return (yOffset + height - 1);
+        }
+
+        public int GetBorderLeft () {
+            return xOffset;
+        }
+
+        public int GetBorderRight () {
+            return (xOffset + width - 1);
+        }
+
         public void Draw () {
 
             Console.Clear ();
