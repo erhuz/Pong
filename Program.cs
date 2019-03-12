@@ -8,7 +8,7 @@ namespace Pong {
 
             Game game = new Game ();
 
-            Console.SetCursorPosition(0,23);
+            Console.SetCursorPosition(0,50);
         }
     }
 }
