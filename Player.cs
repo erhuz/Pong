@@ -6,7 +6,6 @@ namespace Pong
     {
         private readonly string name;
         private int score = 0;
-        private int size;
 
         public Player(
             string name,

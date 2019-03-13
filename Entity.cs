@@ -6,15 +6,15 @@ namespace Pong
     {
         protected int xPos;
         protected int yPos;
+        protected int speed;
+        protected int size;
         protected ConsoleColor color;
 
 
-        protected bool DidEntityHitBarrier(int top, int bottom, int left, int right){
+        public bool DidEntityHitBarrier(int top, int bottom, int left, int right){
             if(
                 this.yPos <= top ||
-                this.yPos >= bottom ||
-                this.xPos <= left ||
-                this.xPos >= right
+                this.yPos >= bottom
             ){
                 return true;
             }
@@ -22,11 +22,11 @@ namespace Pong
             return false;
         }
 
-        protected bool WillEntityHitBarrier(int top, int bottom, int left, int right){
+        public bool WillEntityHitBarrier(int top, int bottom, int left, int right){
             
             if(
                 this.yPos - 1 <= top ||
-                this.yPos + 1 >= bottom ||
+                this.yPos + this.size >= bottom ||
                 this.xPos + 1 <= left ||
                 this.xPos - 1 >= right
             ){
