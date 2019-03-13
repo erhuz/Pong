@@ -6,7 +6,7 @@ namespace Pong {
 
             // Build a menu
 
-            Game game = new Game ();
+            Game game = new Game (60, 16, 4, 2);
 
             Console.SetCursorPosition(0,50);
         }
