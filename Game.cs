@@ -5,52 +5,94 @@ using System.Threading.Tasks;
 namespace Pong {
     public class Game {
 
-        private int duration = 0;
+        private int speed = 10;
+        private int duration;
 
-        public Game () {
+        public Game (int width, int height, int xOffset, int yOffset) {
 
             Console.Clear ();
             Console.CursorVisible = false;
 
-            GameBoard board = new GameBoard (60, 16, 4, 2);
+            bool playing = true;
+
+            GameBoard board = new GameBoard (width, height, xOffset, yOffset);
             Ball ball = new Ball(board.GetCenterHorizontal(), board.GetCenterVertical(), ConsoleColor.Green);
-            Player player1 = new Player("John", board.GetBorderLeft() + 2, (board.GetCenterVertical()), ConsoleColor.Blue);
-            Player player2 = new Player("Alex", board.GetBorderRight() - 2, (board.GetCenterVertical()), ConsoleColor.Red);
+            Player player1 = new Player("John", board.GetBorderLeft() + 2, (board.GetCenterVertical()), 3, ConsoleColor.Blue);
+            Bot player2 = new Bot("Bot", board.GetBorderRight() - 2, (board.GetCenterVertical()));
             
             board.Draw ();
             ball.Draw();
             player1.Draw();
             player2.Draw();
 
-            this.Start();
-        }
-
-        public void Start()
-        {
-            ConsoleKey? input = null;
-            bool playing = true;
-
-            // Read input on separate thread to not block game-loop
-            Task.Factory.StartNew(() =>
-            {
-                while (playing)
-                {
-
-                    input = Console.ReadKey().Key;
-                    Thread.Sleep(10);
+            while(playing){
+                player2.CleanDraw();
+                if(player2.WillEntityHitBarrier(
+                    board.GetBorderTop(),
+                    board.GetBorderBottom(),
+                    board.GetBorderLeft(),
+                    board.GetBorderRight())
+                ){
+                    player2.ChangeDirection();
                 }
-            });
-
-            while (playing)
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(Console.KeyAvailable);
-                input = null;
-
-                Thread.Sleep(50);
+                player2.Move();
+                player2.Draw();
+                
+                Thread.Sleep(this.speed);
             }
 
-            
+            // this.Start();
         }
+
+            
+        // }
+
+        // private void KeypressListener()
+        // {
+
+        //     DateTime lastDrawnProjectile = DateTime.MinValue;
+            
+        //     ConsoleKey key;
+        //     do
+        //     {
+        //         /*
+        //          * while (!Console.KeyAvailable) { }
+        //          */
+                
+
+        //         key = Console.ReadKey(true).Key;
+
+        //         switch (key)
+        //         {
+        //             case ConsoleKey.UpArrow:
+        //             {
+        //                 if (Player.Move(-1))
+        //                     Player.Draw();
+        //                 break;
+        //             }
+        //             case ConsoleKey.DownArrow:
+        //             {
+        //                 if (Player.Move(1))
+        //                     Player.Draw();
+        //                 break;
+        //             }
+        //             case ConsoleKey.Spacebar:
+        //             {
+        //                 if (DateTime.Now > lastDrawnProjectile.AddSeconds(1))
+        //                 {
+        //                     var projectile = new Projectile(Console.WindowHeight - 3,Player.Position, 1);
+        //                     Projectiles.Add(projectile);
+        //                     projectile.Draw();
+        //                     lastDrawnProjectile = DateTime.Now;
+        //                 }
+
+        //                 break;
+        //             }
+        //         }
+
+        //     } while (key != ConsoleKey.Escape);
+
+        //     Environment.Exit(0);
+        // }
     }
 }
