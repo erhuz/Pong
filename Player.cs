@@ -12,8 +12,8 @@ namespace Pong
             string name,
             int xPos,
             int yPos,
-            ConsoleColor color = ConsoleColor.Blue,
-            int size = 3
+            int size = 3,
+            ConsoleColor color = ConsoleColor.Blue
         ){
         
             this.name = name;
@@ -22,6 +22,10 @@ namespace Pong
             this.color = color;
             this.yPos = yPos - (size / 2); // Center player position vertically
         }
+
+        // public bool Move(int y){
+        //     if(this.WillEntityHitBarrier())
+        // }
 
         public void Draw(){
             ConsoleColor initialColor = Console.BackgroundColor;
@@ -35,6 +39,13 @@ namespace Pong
 
             Console.BackgroundColor = initialColor;
             Console.SetCursorPosition (0, 0);
+        }
+
+        public void CleanDraw(){
+                Console.SetCursorPosition(this.xPos, this.yPos);
+                Console.Write(" ");
+                Console.SetCursorPosition(this.xPos, this.yPos + this.size - 1);
+                Console.Write(" ");
         }
     }
 }
