@@ -21,5 +21,19 @@ namespace Pong {
 
             return false;
         }
+
+        public string WhichBarrierWillEntityHit (int top, int bottom, int left, int right) {
+            if (this.yPos - 1 <= top) {
+                return "top";
+            } else if (this.yPos + this.size >= bottom) {
+                return "bottom";
+            } else if (this.xPos + 1 <= left) {
+                return "left";
+            } else if (this.xPos - 1 >= right) {
+                return "right";
+            } else {
+                return null;
+            }
+        }
     }
 }
