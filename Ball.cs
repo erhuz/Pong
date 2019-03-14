@@ -30,17 +30,35 @@ namespace Pong {
             this.leftBarrier = leftBarrier;
             this.rightBarrier = rightBarrier;
 
-            this.xSpeed = speed * 1; // 2
+            this.xSpeed = speed * 2;
             this.ySpeed = speed;
         }
 
-        public bool WillEntityHitBarrier (int top, int bottom, int left, int right, int speed = 1) {
+        private bool WillBallHitAPlayer (Player player1, Player player2){
+            for (int i = player1.yPos; i < player1.yPos + player1.size; i++)
+            {
+                if(this.yPos == i && this.xPos <= player1.xPos + 2){
+                    return true;
+                }
+            }
+
+            for (int i = player2.yPos; i < player2.yPos + player2.size; i++)
+            {
+                if(this.yPos == i && this.xPos >= player2.xPos - 1){
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        public bool WillEntityHitBarrier (int top, int bottom, int left, int right, int xSpeed = 2, int ySpeed = 1) {
 
             if (
-                this.yPos - speed <= top ||
-                this.yPos + speed >= bottom ||
-                this.xPos - speed - 1 <= left ||
-                this.xPos + speed >= right
+                this.yPos - ySpeed <= top ||
+                this.yPos + ySpeed >= bottom ||
+                this.xPos - xSpeed - 1 <= left ||
+                this.xPos + xSpeed >= right
             ){
                 return true;
             }
@@ -48,31 +66,31 @@ namespace Pong {
             return false;
         }
 
-        public string WhichBarrierWillEntityHit (int top, int bottom, int left, int right, int speed = 1) {
+        public string WhichBarrierWillEntityHit (int top, int bottom, int left, int right, int xSpeed = 2, int ySpeed = 1) {
             if(
-                (this.yPos + speed >= bottom && this.xPos - speed - 2 <= left) || // bottom left
-                (this.yPos - speed <= top && this.xPos - speed - 2 <= left) || // top left
-                (this.yPos + speed >= bottom && this.xPos + speed + 1 >= right) || // bottom right
-                (this.yPos - speed <= top && this.xPos + speed + 1 >= right) // top right
+                (this.yPos - ySpeed <= top && this.xPos - xSpeed - 1 <= left) || // top left
+                (this.yPos - ySpeed <= top && this.xPos + xSpeed >= right) || // top right
+                (this.yPos + ySpeed >= bottom && this.xPos - xSpeed - 1 <= left) || // bottom left
+                (this.yPos + ySpeed >= bottom && this.xPos + xSpeed >= right) // bottom right
             ){
                 return "corner";
             }
 
-            if (this.yPos + speed >= bottom) {
+            if (this.yPos + ySpeed >= bottom) {
                 return "bottom";
             }
             
-            if (this.yPos - speed <= top) 
+            if (this.yPos - ySpeed <= top) 
             {
                 return "top";
             }
             
-            if (this.xPos - speed - 2 <= left) 
+            if (this.xPos - xSpeed - 1 <= left) 
             {
                 return "left";
             }
             
-            if (this.xPos + speed + 1 >= right) 
+            if (this.xPos + xSpeed >= right) 
             {
                 return "right";
             }
@@ -88,7 +106,7 @@ namespace Pong {
             this.ySpeed *= -1;
         }
 
-        public void Move () {
+        public void Move (Player player1, Player player2) {
             if(this.WillEntityHitBarrier(this.topBarrier, this.bottomBarrier, this.leftBarrier, this.rightBarrier)){
                 string determinedBarrier = WhichBarrierWillEntityHit(this.topBarrier, this.bottomBarrier, this.leftBarrier, this.rightBarrier);
                 
@@ -103,11 +121,13 @@ namespace Pong {
                         break;
                     
                     case "left":
-                        ChangeXDirection();
+                        System.Environment.Exit(1);
+                        // ChangeXDirection();
                         break;
                     
                     case "right":
-                        ChangeXDirection();
+                        System.Environment.Exit(1);
+                        // ChangeXDirection();
                         break;
 
                     case "corner":
@@ -118,7 +138,11 @@ namespace Pong {
                 
             }
 
-            this.yPos += this.ySpeed;
+            if(WillBallHitAPlayer(player1, player2)){
+                ChangeXDirection();
+            }
+
+            // this.yPos += this.ySpeed;
             this.xPos += this.xSpeed;
         }
 
