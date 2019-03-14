@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Pong {
     class Program {
@@ -6,9 +6,9 @@ namespace Pong {
 
             // Build a menu
 
-            Game game = new Game (60, 16, 4, 2);
+            Game game = new Game ();
 
-            Console.SetCursorPosition(0,50);
+            Console.SetCursorPosition (0, 50);
         }
     }
 }
