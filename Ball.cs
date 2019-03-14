@@ -38,10 +38,10 @@ namespace Pong {
 
             if (
                 this.yPos - speed <= top ||
-                this.yPos >= bottom - 1 ||
-                this.xPos + speed <= left ||
-                this.xPos - speed >= right
-            ) {
+                this.yPos + speed >= bottom ||
+                this.xPos - speed - 1 <= left ||
+                this.xPos + speed >= right
+            ){
                 return true;
             }
 
@@ -49,7 +49,16 @@ namespace Pong {
         }
 
         public string WhichBarrierWillEntityHit (int top, int bottom, int left, int right, int speed = 1) {
-            if (this.yPos >= bottom -1 ) {
+            if(
+                (this.yPos + speed >= bottom && this.xPos - speed - 2 <= left) || // bottom left
+                (this.yPos - speed <= top && this.xPos - speed - 2 <= left) || // top left
+                (this.yPos + speed >= bottom && this.xPos + speed + 1 >= right) || // bottom right
+                (this.yPos - speed <= top && this.xPos + speed + 1 >= right) // top right
+            ){
+                return "corner";
+            }
+
+            if (this.yPos + speed >= bottom) {
                 return "bottom";
             }
             
@@ -58,12 +67,12 @@ namespace Pong {
                 return "top";
             }
             
-            if (this.xPos + speed <= left) 
+            if (this.xPos - speed - 2 <= left) 
             {
                 return "left";
             }
             
-            if (this.xPos - speed >= right) 
+            if (this.xPos + speed + 1 >= right) 
             {
                 return "right";
             }
@@ -80,8 +89,8 @@ namespace Pong {
         }
 
         public void Move () {
-            if(this.WillEntityHitBarrier(this.topBarrier, this.bottomBarrier, this.xPos - 5, this.xPos + 5)){
-                string determinedBarrier = WhichBarrierWillEntityHit(this.topBarrier, this.bottomBarrier, this.xPos - 5, this.xPos + 5);
+            if(this.WillEntityHitBarrier(this.topBarrier, this.bottomBarrier, this.leftBarrier, this.rightBarrier)){
+                string determinedBarrier = WhichBarrierWillEntityHit(this.topBarrier, this.bottomBarrier, this.leftBarrier, this.rightBarrier);
                 
                 switch (determinedBarrier)
                 {
@@ -100,12 +109,17 @@ namespace Pong {
                     case "right":
                         ChangeXDirection();
                         break;
+
+                    case "corner":
+                        ChangeXDirection();
+                        ChangeYDirection();
+                        break;
                 }
                 
             }
 
             this.yPos += this.ySpeed;
-            // this.xPos += this.xSpeed;
+            this.xPos += this.xSpeed;
         }
 
         public override void Draw () {
