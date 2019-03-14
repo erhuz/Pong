@@ -9,8 +9,8 @@ namespace Pong {
         private int duration;
         private int playerSize = 4;
 
-        private int boardWidth = 60;
-        private int boardHeight = 16;
+        private int boardWidth = 80;
+        private int boardHeight = 24;
         private int boardXOffset = 4;
         private int boardYOffset = 2;
 
@@ -34,16 +34,19 @@ namespace Pong {
             Ball ball = new Ball (
                 board.GetCenterHorizontal (),
                 board.GetCenterVertical (),
+                board.GetBorderTop (),
+                board.GetBorderBottom (),
+                board.GetBorderLeft (),
+                board.GetBorderRight (),
                 ConsoleColor.Green
             );
-            Player player1 = new Player (
+            Bot player1 = new Bot (
                 "John",
                 board.GetBorderLeft () + 2,
                 board.GetCenterVertical (),
                 board.GetBorderTop (),
                 board.GetBorderBottom (),
-                this.playerSize,
-                ConsoleColor.Blue
+                this.playerSize
             );
             Bot player2 = new Bot (
                 "Bot",
@@ -62,12 +65,18 @@ namespace Pong {
             while (playing) {
 
                 // Move Player / Bot
+                player1.CleanDraw ();
                 player2.CleanDraw ();
-                player2.Move ();
-                player2.Draw ();
+                ball.CleanDraw ();
 
-                ball.Move();
-                ball.Draw();
+                // Move Player / Bot
+                player1.Move ();
+                player2.Move ();
+                ball.Move ();
+
+                player1.Draw ();
+                player2.Draw ();
+                ball.Draw ();
 
                 Thread.Sleep (this.speed);
             }
