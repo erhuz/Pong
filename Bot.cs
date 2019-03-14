@@ -20,7 +20,7 @@ namespace Pong {
                 this.ChangeDirection();
             }
 
-            this.yPos += this.speed;
+            // this.yPos += this.speed;
         }
     }
 }

@@ -142,7 +142,7 @@ namespace Pong {
                 ChangeXDirection();
             }
 
-            // this.yPos += this.ySpeed;
+            this.yPos += this.ySpeed;
             this.xPos += this.xSpeed;
         }
 
