@@ -9,8 +9,8 @@ namespace Pong {
         private int duration;
         private int playerSize = 4;
 
-        private int boardWidth = 80;
-        private int boardHeight = 24;
+        private int boardWidth = 82; // Only (n % 0) + 2 values
+        private int boardHeight = 30;
         private int boardXOffset = 4;
         private int boardYOffset = 2;
 
@@ -64,19 +64,17 @@ namespace Pong {
 
             while (playing) {
 
-                // Move Player / Bot
+                ball.CleanDraw ();
                 player1.CleanDraw ();
                 player2.CleanDraw ();
-                ball.CleanDraw ();
 
-                // Move Player / Bot
+                ball.Move (player1, player2);
                 player1.Move ();
                 player2.Move ();
-                ball.Move ();
 
+                ball.Draw ();
                 player1.Draw ();
                 player2.Draw ();
-                ball.Draw ();
 
                 Thread.Sleep (this.speed);
             }
