@@ -26,11 +26,33 @@ namespace Pong {
             this.color = color;
         }
 
-        // public bool Move(int y){
-        //     if(this.WillEntityHitBarrier())
-        // }
+        public bool WillEntityHitBarrier (int top, int bottom) {
 
-        public void Draw () {
+            if (
+                this.yPos - 1 <= top ||
+                this.yPos + this.size >= bottom
+            ) {
+                return true;
+            }
+
+            return false;
+        }
+        
+        public string WhichBarrierWillEntityHit (int top, int bottom, int speed = 1) {
+            if (this.yPos - speed <= top) {
+                return "top";
+            }
+            else if (this.yPos + this.size >= bottom) 
+            {
+                return "bottom";
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        public override void Draw () {
             ConsoleColor initialColor = Console.BackgroundColor;
             Console.BackgroundColor = color;
 
@@ -43,7 +65,7 @@ namespace Pong {
             Console.SetCursorPosition (0, 0);
         }
 
-        public void CleanDraw () {
+        public override void CleanDraw () {
             Console.SetCursorPosition (this.xPos, this.yPos);
             Console.Write (" ");
             Console.SetCursorPosition (this.xPos, this.yPos + this.size - 1);
