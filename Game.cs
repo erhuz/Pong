@@ -60,22 +60,18 @@ namespace Pong {
             player2.Draw ();
 
             while (playing) {
+
+                // Move Player / Bot
                 player2.CleanDraw ();
-                if (player2.WillEntityHitBarrier (
-                        board.GetBorderTop (),
-                        board.GetBorderBottom (),
-                        board.GetBorderLeft (),
-                        board.GetBorderRight ())) {
-                    player2.ChangeDirection ();
-                }
                 player2.Move ();
                 player2.Draw ();
+
+                ball.Move();
+                ball.Draw();
 
                 Thread.Sleep (this.speed);
             }
         }
-
-        // }
 
         // private void KeypressListener()
         // {

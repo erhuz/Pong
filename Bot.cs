@@ -16,6 +16,10 @@ namespace Pong {
         }
 
         public void Move () {
+            if(this.WillEntityHitBarrier(this.topBarrier, this.bottomBarrier, this.xPos - 5, this.xPos + 5)){
+                this.ChangeDirection();
+            }
+
             this.yPos += this.speed;
         }
     }
