@@ -26,9 +26,9 @@ namespace Pong {
             bool playing = true;
 
             GameBoard board = new GameBoard (
-                this.boardWidth, 
-                this.boardHeight, 
-                this.boardXOffset, 
+                this.boardWidth,
+                this.boardHeight,
+                this.boardXOffset,
                 this.boardYOffset
             );
             Ball ball = new Ball (
@@ -37,20 +37,20 @@ namespace Pong {
                 ConsoleColor.Green
             );
             Player player1 = new Player (
-                "John", 
-                board.GetBorderLeft () + 2, 
+                "John",
+                board.GetBorderLeft () + 2,
                 board.GetCenterVertical (),
-                board.GetBorderTop(),
-                board.GetBorderBottom(),
+                board.GetBorderTop (),
+                board.GetBorderBottom (),
                 this.playerSize,
                 ConsoleColor.Blue
             );
             Bot player2 = new Bot (
-                "Bot", 
-                board.GetBorderRight () - 2, 
+                "Bot",
+                board.GetBorderRight () - 2,
                 board.GetCenterVertical (),
-                board.GetBorderTop(),
-                board.GetBorderBottom(),
+                board.GetBorderTop (),
+                board.GetBorderBottom (),
                 this.playerSize
             );
 
