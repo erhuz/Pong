@@ -28,28 +28,37 @@ namespace Pong {
         }
 
         public int GetBorderTop () {
-            return yOffset;
+            return this.yOffset;
         }
 
         public int GetBorderBottom () {
-            return (yOffset + height - 1);
+            return (this.yOffset + this.height - 1);
         }
 
         public int GetBorderLeft () {
-            return xOffset;
+            return this.xOffset;
         }
 
         public int GetBorderRight () {
-            return (xOffset + width - 1);
+            return (this.xOffset + this.width - 1);
         }
 
-        public int GetCenterVertical(){
-            return (this.GetBorderTop() + this.GetBorderBottom() / 2);
+        public int GetCenterVertical () {
+            return (this.GetBorderTop () + this.GetBorderBottom () / 2);
         }
-        
-        public int GetCenterHorizontal(){
-            return (this.GetBorderLeft() + this.GetBorderRight() / 2);
+
+        public int GetCenterHorizontal () {
+            return (this.GetBorderLeft () + this.GetBorderRight () / 2);
         }
+
+        // public (int, int, int, int) GetAllBorders(){
+        //     return(
+        //         this.GetBorderTop(),
+        //         this.GetBorderBottom(),
+        //         this.GetBorderRight(),
+        //         this.GetBorderLeft(),
+        //     );
+        // }
 
         public void Draw () {
 
