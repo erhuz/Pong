@@ -16,8 +16,15 @@ namespace Pong {
 
         public Game () {
 
-            Console.Clear ();
+            
             Console.CursorVisible = false;
+            Console.Clear ();
+
+            for (int i = 4; i > 0; i--)
+            {
+                Console.WriteLine($"The game will start in {i}");
+                Thread.Sleep(1000);
+            }
 
             this.Start ();
         }
@@ -71,6 +78,9 @@ namespace Pong {
                 {
 
                     input = Console.ReadKey().Key;
+                    if(input == ConsoleKey.Q){
+                        System.Environment.Exit(0);
+                    }
                     Thread.Sleep(this.speed / 2);
                 }
             });
