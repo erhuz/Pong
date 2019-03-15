@@ -121,13 +121,19 @@ namespace Pong {
                         break;
                     
                     case "left":
+                        Console.Clear();
+                        Console.SetCursorPosition(0,0);
+                        Console.WriteLine($"{player2.name} Won!");
+                        Console.WriteLine($"Better luck next time {player1.name}!");
                         System.Environment.Exit(1);
-                        // ChangeXDirection();
                         break;
                     
                     case "right":
+                        Console.Clear();
+                        Console.SetCursorPosition(0,0);
+                        Console.WriteLine($"{player1.name} Won!");
+                        Console.WriteLine($"Better luck next time {player2.name}!");
                         System.Environment.Exit(1);
-                        // ChangeXDirection();
                         break;
 
                     case "corner":
