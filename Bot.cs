@@ -22,5 +22,31 @@ namespace Pong {
 
             this.yPos += this.speed;
         }
+
+        public void FollowBall (Ball ball) {
+            if(WillEntityHitBarrier(topBarrier, bottomBarrier)){
+                string determinedBarrier = WhichBarrierWillEntityHit(topBarrier, bottomBarrier);
+
+                if(
+                    !(determinedBarrier == "top" && ball.ySpeed < 0) &&
+                    !(determinedBarrier == "bottom" && ball.ySpeed > 0)
+                ){
+                    if(size % 2 == 0){
+                        if(determinedBarrier == "top"){
+                            this.yPos = ball.yPos - (size / 2) + 1;
+                        }else{
+                            this.yPos = ball.yPos - (size / 2);
+                        }
+                    }else{
+                        this.yPos = ball.yPos - (size / 2) + 1;
+                    }
+                }
+
+            }
+            else
+            {
+                this.yPos = ball.yPos - (size / 2);
+            }
+        }
     }
 }
