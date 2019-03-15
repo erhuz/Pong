@@ -2,7 +2,7 @@ using System;
 
 namespace Pong {
     public class Player : Entity {
-        private readonly string name;
+        public readonly string name;
         private int score = 0;
         protected int topBarrier;
         protected int bottomBarrier;
