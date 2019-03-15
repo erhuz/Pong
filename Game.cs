@@ -23,6 +23,7 @@ namespace Pong {
         }
 
         private void Start () {
+            ConsoleKey? input = null;
             bool playing = true;
 
             GameBoard board = new GameBoard (
@@ -40,7 +41,7 @@ namespace Pong {
                 board.GetBorderRight (),
                 ConsoleColor.Green
             );
-            Bot player1 = new Bot (
+            Player player1 = new Player (
                 "John",
                 board.GetBorderLeft () + 2,
                 board.GetCenterVertical (),
@@ -62,20 +63,38 @@ namespace Pong {
             player1.Draw ();
             player2.Draw ();
 
+
+            // Read input on separate thread to not block the game-loop
+            Task.Factory.StartNew(() =>
+            {
+                while (playing)
+                {
+
+                    input = Console.ReadKey().Key;
+                    Thread.Sleep(this.speed / 2);
+                }
+            });
+
             while (playing) {
 
                 ball.CleanDraw ();
                 player1.CleanDraw ();
                 player2.CleanDraw ();
 
-                ball.Move (player1, player2);
-                player1.FollowBall (ball);
+
+                if(input == ConsoleKey.UpArrow){
+                    player1.Move (-1);
+                }else if(input == ConsoleKey.DownArrow){
+                    player1.Move (1);
+                }
                 player2.FollowBall (ball);
+                ball.Move (player1, player2);
 
                 ball.Draw ();
-                player1.Draw ();
+                player1.Draw ();            
                 player2.Draw ();
 
+                // input = null; Don't reset input due to clumpsy movement
                 Thread.Sleep (this.speed);
             }
         }
