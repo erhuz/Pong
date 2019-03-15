@@ -25,6 +25,22 @@ namespace Pong {
             this.size = size;
             this.color = color;
         }
+        public bool Move(int direction){
+            if(WillEntityHitBarrier(topBarrier, bottomBarrier)){
+                string determinedBarrier = WhichBarrierWillEntityHit(topBarrier, bottomBarrier);
+
+                if(
+                    (direction == -1 && determinedBarrier == "top") ||
+                    (direction == 1 && determinedBarrier == "bottom")
+                ){
+                    return false;
+                }
+            }
+
+            this.yPos += direction * this.speed;
+
+            return true;
+        }
 
         public bool WillEntityHitBarrier (int top, int bottom) {
 
