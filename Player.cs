@@ -37,7 +37,7 @@ namespace Pong {
                 }
             }
 
-            this.yPos += direction * this.speed;
+            this.yPos += direction;
 
             return true;
         }
