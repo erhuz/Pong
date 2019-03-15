@@ -69,8 +69,8 @@ namespace Pong {
                 player2.CleanDraw ();
 
                 ball.Move (player1, player2);
-                player1.Move ();
-                player2.Move ();
+                player1.FollowBall (ball);
+                player2.FollowBall (ball);
 
                 ball.Draw ();
                 player1.Draw ();
@@ -80,51 +80,41 @@ namespace Pong {
             }
         }
 
-        // private void KeypressListener()
-        // {
+        private void KeypressListener(Player player)
+        {
 
-        //     DateTime lastDrawnProjectile = DateTime.MinValue;
+            ConsoleKey key;
+            do
+            {
+                /*
+                 * while (!Console.KeyAvailable) { }
+                 */
 
-        //     ConsoleKey key;
-        //     do
-        //     {
-        //         /*
-        //          * while (!Console.KeyAvailable) { }
-        //          */
+                key = Console.ReadKey(true).Key;
 
-        //         key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                    {
+                        if (player.Move(-1))
+                        {
+                            player.Draw();
+                        }
+                        break;
+                    }
+                    case ConsoleKey.DownArrow:
+                    {
+                        if (player.Move(1))
+                        {
+                            player.Draw();
+                        }
+                        break;
+                    }
+                }
 
-        //         switch (key)
-        //         {
-        //             case ConsoleKey.UpArrow:
-        //             {
-        //                 if (Player.Move(-1))
-        //                     Player.Draw();
-        //                 break;
-        //             }
-        //             case ConsoleKey.DownArrow:
-        //             {
-        //                 if (Player.Move(1))
-        //                     Player.Draw();
-        //                 break;
-        //             }
-        //             case ConsoleKey.Spacebar:
-        //             {
-        //                 if (DateTime.Now > lastDrawnProjectile.AddSeconds(1))
-        //                 {
-        //                     var projectile = new Projectile(Console.WindowHeight - 3,Player.Position, 1);
-        //                     Projectiles.Add(projectile);
-        //                     projectile.Draw();
-        //                     lastDrawnProjectile = DateTime.Now;
-        //                 }
+            } while (key != ConsoleKey.Escape);
 
-        //                 break;
-        //             }
-        //         }
-
-        //     } while (key != ConsoleKey.Escape);
-
-        //     Environment.Exit(0);
-        // }
+            Environment.Exit(0);
+        }
     }
 }
