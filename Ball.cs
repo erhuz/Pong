@@ -3,8 +3,8 @@ using System;
 namespace Pong {
     public class Ball : Entity {
 
-        private int ySpeed;
-        private int xSpeed;
+        public int ySpeed { get; private set; }
+        public int xSpeed { get; private set; }
 
         private int topBarrier;
         private int bottomBarrier;
