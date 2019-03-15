@@ -6,7 +6,7 @@ namespace Pong {
     public class Game {
 
         private int speed = 100;
-        private int duration;
+        private Int64 duration = 0;
         private int playerSize = 4;
 
         private int boardWidth = 82; // Only (n % 0) + 2 values
